@@ -18,7 +18,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPage extends State<MainPage> {
-  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
+  BluetoothSerialState _bluetoothState = BluetoothSerialState.UNKNOWN;
 
   String _address = "...";
   String _name = "...";
@@ -66,7 +66,7 @@ class _MainPage extends State<MainPage> {
     // Listen for futher state changes
     FlutterBluetoothSerial.instance
         .onStateChanged()
-        .listen((BluetoothState state) {
+        .listen((BluetoothSerialState state) {
       setState(() {
         _bluetoothState = state;
 
@@ -219,7 +219,7 @@ class _MainPage extends State<MainPage> {
               title: ElevatedButton(
                   child: const Text('Explore discovered devices'),
                   onPressed: () async {
-                    final BluetoothDevice? selectedDevice =
+                    final BluetoothSerialDevice? selectedDevice =
                         await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
@@ -239,7 +239,7 @@ class _MainPage extends State<MainPage> {
               title: ElevatedButton(
                 child: const Text('Connect to paired device to chat'),
                 onPressed: () async {
-                  final BluetoothDevice? selectedDevice =
+                  final BluetoothSerialDevice? selectedDevice =
                       await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
@@ -271,7 +271,7 @@ class _MainPage extends State<MainPage> {
                       /* Update for `_collectingTask.inProgress` */
                     });
                   } else {
-                    final BluetoothDevice? selectedDevice =
+                    final BluetoothSerialDevice? selectedDevice =
                         await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
@@ -316,7 +316,7 @@ class _MainPage extends State<MainPage> {
     );
   }
 
-  void _startChat(BuildContext context, BluetoothDevice server) {
+  void _startChat(BuildContext context, BluetoothSerialDevice server) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
@@ -328,7 +328,7 @@ class _MainPage extends State<MainPage> {
 
   Future<void> _startBackgroundTask(
     BuildContext context,
-    BluetoothDevice server,
+    BluetoothSerialDevice server,
   ) async {
     try {
       _collectingTask = await BackgroundCollectingTask.connect(server);

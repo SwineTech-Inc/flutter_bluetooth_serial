@@ -44,13 +44,14 @@ class FlutterBluetoothSerial {
       const EventChannel('$namespace/state');
 
   /// Allows monitoring the Bluetooth adapter state changes.
-  Stream<BluetoothState> onStateChanged() => _stateChannel
+  Stream<BluetoothSerialState> onStateChanged() => _stateChannel
       .receiveBroadcastStream()
-      .map((data) => BluetoothState.fromUnderlyingValue(data));
+      .map((data) => BluetoothSerialState.fromUnderlyingValue(data));
 
   /// State of the Bluetooth adapter.
-  Future<BluetoothState> get state async => BluetoothState.fromUnderlyingValue(
-      await _methodChannel.invokeMethod('getState'));
+  Future<BluetoothSerialState> get state async =>
+      BluetoothSerialState.fromUnderlyingValue(
+          await _methodChannel.invokeMethod('getState'));
 
   /// Returns the hardware address of the local Bluetooth adapter.
   ///
@@ -193,9 +194,9 @@ class FlutterBluetoothSerial {
   }
 
   /// Returns list of bonded devices.
-  Future<List<BluetoothDevice>> getBondedDevices() async {
+  Future<List<BluetoothSerialDevice>> getBondedDevices() async {
     final List list = await (_methodChannel.invokeMethod('getBondedDevices'));
-    return list.map((map) => BluetoothDevice.fromMap(map)).toList();
+    return list.map((map) => BluetoothSerialDevice.fromMap(map)).toList();
   }
 
   static final EventChannel _discoveryChannel =
@@ -254,7 +255,7 @@ class FlutterBluetoothSerial {
       _defaultConnection == null ? false : _defaultConnection!.isConnected);
 
   @Deprecated('Use `BluetoothConnection.toAddress(device.address)` instead')
-  Future<void> connect(BluetoothDevice device) =>
+  Future<void> connect(BluetoothSerialDevice device) =>
       connectToAddress(device.address);
 
   @Deprecated('Use `BluetoothConnection.toAddress(address)` instead')

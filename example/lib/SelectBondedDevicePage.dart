@@ -23,7 +23,7 @@ enum _DeviceAvailability {
 }
 
 class _DeviceWithAvailability {
-  BluetoothDevice device;
+  BluetoothSerialDevice device;
   _DeviceAvailability availability;
   int? rssi;
 
@@ -53,7 +53,7 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
     // Setup a list of the bonded devices
     FlutterBluetoothSerial.instance
         .getBondedDevices()
-        .then((List<BluetoothDevice> bondedDevices) {
+        .then((List<BluetoothSerialDevice> bondedDevices) {
       setState(() {
         devices = bondedDevices
             .map(

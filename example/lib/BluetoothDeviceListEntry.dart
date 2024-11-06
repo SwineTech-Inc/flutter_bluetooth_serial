@@ -3,7 +3,7 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 class BluetoothDeviceListEntry extends ListTile {
   BluetoothDeviceListEntry({
-    required BluetoothDevice device,
+    required BluetoothSerialDevice device,
     int? rssi,
     GestureTapCallback? onTap,
     GestureLongPressCallback? onLongPress,

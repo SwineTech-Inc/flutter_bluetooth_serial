@@ -1,7 +1,7 @@
 part of flutter_bluetooth_serial;
 
 class BluetoothDiscoveryResult {
-  final BluetoothDevice device;
+  final BluetoothSerialDevice device;
   final int rssi;
 
   BluetoothDiscoveryResult({
@@ -11,7 +11,7 @@ class BluetoothDiscoveryResult {
 
   factory BluetoothDiscoveryResult.fromMap(Map map) {
     return BluetoothDiscoveryResult(
-      device: BluetoothDevice.fromMap(map),
+      device: BluetoothSerialDevice.fromMap(map),
       rssi: map['rssi'] ?? 0,
     );
   }

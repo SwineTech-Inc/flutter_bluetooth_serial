@@ -1,7 +1,7 @@
 part of flutter_bluetooth_serial;
 
 /// Represents information about the device. Could be out-of-date. // @TODO . add updating the info via some fn
-class BluetoothDevice {
+class BluetoothSerialDevice {
   /// Broadcasted friendly name of the device.
   final String? name;
 
@@ -28,7 +28,7 @@ class BluetoothDevice {
   bool get isBonded => bondState.isBonded;
 
   /// Construct `BluetoothDevice` with given values.
-  const BluetoothDevice({
+  const BluetoothSerialDevice({
     this.name,
     required this.address,
     this.type = BluetoothDeviceType.unknown,
@@ -39,8 +39,8 @@ class BluetoothDevice {
   /// Creates `BluetoothDevice` from map.
   ///
   /// Internally used to receive the object from platform code.
-  factory BluetoothDevice.fromMap(Map map) {
-    return BluetoothDevice(
+  factory BluetoothSerialDevice.fromMap(Map map) {
+    return BluetoothSerialDevice(
       name: map["name"],
       address: map["address"]!,
       type: map["type"] != null
@@ -67,7 +67,7 @@ class BluetoothDevice {
   /// In fact, only `address` is compared, since this is most important
   /// and unchangable information that identifies each device.
   operator ==(Object other) {
-    return other is BluetoothDevice && other.address == this.address;
+    return other is BluetoothSerialDevice && other.address == this.address;
   }
 
   @override

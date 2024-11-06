@@ -124,7 +124,7 @@ class _DiscoveryPage extends State<DiscoveryPage> {
                 }
                 setState(() {
                   results[results.indexOf(result)] = BluetoothDiscoveryResult(
-                      device: BluetoothDevice(
+                      device: BluetoothSerialDevice(
                         name: device.name ?? '',
                         address: address,
                         type: device.type,
